@@ -45,6 +45,9 @@ namespace Windows_Screen_Placer
             this.textBoxY = new System.Windows.Forms.TextBox();
             this.textBoxWidth = new System.Windows.Forms.TextBox();
             this.textBoxHeigth = new System.Windows.Forms.TextBox();
+            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonExecuteList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonStart
@@ -182,11 +185,42 @@ namespace Windows_Screen_Placer
             this.textBoxHeigth.Size = new System.Drawing.Size(55, 23);
             this.textBoxHeigth.TabIndex = 17;
             // 
+            // checkedListBox2
+            // 
+            this.checkedListBox2.FormattingEnabled = true;
+            this.checkedListBox2.Location = new System.Drawing.Point(261, 128);
+            this.checkedListBox2.MultiColumn = true;
+            this.checkedListBox2.Name = "checkedListBox2";
+            this.checkedListBox2.Size = new System.Drawing.Size(527, 292);
+            this.checkedListBox2.TabIndex = 18;
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(490, 99);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd.TabIndex = 19;
+            this.buttonAdd.Text = "Add";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // buttonExecuteList
+            // 
+            this.buttonExecuteList.Location = new System.Drawing.Point(261, 418);
+            this.buttonExecuteList.Name = "buttonExecuteList";
+            this.buttonExecuteList.Size = new System.Drawing.Size(75, 23);
+            this.buttonExecuteList.TabIndex = 20;
+            this.buttonExecuteList.Text = "Execute";
+            this.buttonExecuteList.UseVisualStyleBackColor = true;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonExecuteList);
+            this.Controls.Add(this.buttonAdd);
+            this.Controls.Add(this.checkedListBox2);
             this.Controls.Add(this.textBoxHeigth);
             this.Controls.Add(this.textBoxWidth);
             this.Controls.Add(this.textBoxY);
@@ -227,6 +261,9 @@ namespace Windows_Screen_Placer
         private System.Windows.Forms.TextBox textBoxY;
         private System.Windows.Forms.TextBox textBoxWidth;
         private System.Windows.Forms.TextBox textBoxHeigth;
+        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonExecuteList;
     }
 }
 

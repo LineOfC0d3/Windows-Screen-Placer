@@ -8,19 +8,8 @@ namespace Windows_Screen_Placer
 {
     public partial class MainMenu : Form
     {
-        [DllImport("user32.dll", SetLastError = true)]
-        internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
-        [DllImport("user32.dll", SetLastError = true)]
-        internal static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
-        internal static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
-        [DllImport("user32.dll")]
-        public static extern bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
+        //TODO: Move Logic to "WindowPlacer"
 
-        private Process activeProcess = null;
-        private const int SW_RESTORE = 9;
         public MainMenu()
         {
             InitializeComponent();
@@ -29,7 +18,6 @@ namespace Windows_Screen_Placer
         private void buttonStart_Click(object sender, EventArgs e)
         {
             string programPath = openFileDialog1.FileName;
-            Process process = null;
             if (activeProcess != null)
             {
                 
@@ -38,19 +26,10 @@ namespace Windows_Screen_Placer
                 {
                     return;
                 }
-                else
-                {
-                    //TODO: activeProcess can't be checked or killed (WHY?)
-                    activeProcess.Kill();
-                }
             }
             try
             {
-                process = Process.Start(programPath);
-            }
-            catch (Win32Exception)
-            {
-                process = ExecuteAsAdmin(programPath);
+                ProcessHandler.Start(programPath);
             }
             finally
             {
@@ -70,22 +49,10 @@ namespace Windows_Screen_Placer
         {
             using (process)
             {
-                process.WaitForInputIdle();
-                Debug.WriteLine(process.Id);
                 activeProcess = process;
                 IntPtr test = process.MainWindowHandle;
                 bool testbool = process.HasExited;
             }
-        }
-
-        public Process ExecuteAsAdmin(string fileName)
-        {
-            Process proc = new Process();
-            proc.StartInfo.FileName = fileName;
-            proc.StartInfo.UseShellExecute = true;
-            proc.StartInfo.Verb = "runas";
-            proc.Start();
-            return proc;
         }
 
         private void buttonPlace_Click(object sender, EventArgs e)
@@ -136,29 +103,9 @@ namespace Windows_Screen_Placer
             UpdateWindowBoundaries(activeProcess);
         }
 
-        private void UpdateWindowBoundaries(Process p)
+        private void buttonAdd_Click(object sender, EventArgs e)
         {
-            if (activeProcess == null)
-            {
-                MessageBox.Show("Chosen program not launched");
-            }
-            else
-            {
-                Rect result = GetWindowBoundaries(activeProcess);
 
-                textBoxX.Text = Convert.ToString(result.Left);
-                textBoxY.Text = Convert.ToString(result.Top);
-                textBoxWidth.Text = Convert.ToString(result.Right - result.Left);
-                textBoxHeigth.Text = Convert.ToString(result.Bottom - result.Top);
-            }
-        }
-
-        private Rect GetWindowBoundaries(Process process)
-        {
-            IntPtr mwh = process.MainWindowHandle;
-            Rect appRect = new Rect();
-            GetWindowRect(mwh, ref appRect);
-            return appRect;
         }
     }
 }
