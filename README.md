@@ -16,8 +16,14 @@ Testing some stuff/ideas
 not ready
 
 ## Example usage
+* Improve your workflow by opening the programs you need
+  * Whatever software you need will be opended an placed where you need it!
+  * We all know Windows has some problems with that 
+
 * You're streaming for a hobby/professionally and need some programs running before you're ready
   * This project could open chat windows, streaming software, playback, etc.
   * You could save different layouts to start only some programs / on specific locations on screen
+
+
 
 Programmed in C# (.Net-Core 3.1)
