@@ -4,13 +4,15 @@ using System.IO;
 
 namespace Windows_Screen_Placer
 {
-    static class ProcessHandler
+    internal static class ProcessHandler
     {
         public static Process HandledProcess { get; private set; }
-        public static void Start(string exePath)
+
+        public static void Start(string exePath, bool forceAdmin = false)
         {
             Start(exePath, "");
         }
+
         public static void Start(string exePath, string args)
         {
             HandledProcess = new Process();
